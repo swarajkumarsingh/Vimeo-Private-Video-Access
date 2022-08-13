@@ -1,0 +1,17 @@
+Task List:
+1. Flutter implement webview
+	- load url: https://player.vimeo.com/video/730972653?h=eae2597c37
+2. Implement Webview page loading:
+	https://stackoverflow.com/questions/58713912/how-to-show-loading-indicator-in-webview-flutter
+3. When page is loaded 100% ->  get page coookie
+	https://pub.dev/packages/webview_cookie_manager
+
+DONE
+
+
+Refence: 
+Api URL: https://player.vimeo.com/video/730972653?h=eae2597c37
+Headers: 
+Cookie: vuid=pl1608003099.510395977; player=""; auth_redirect=https%3A%2F%2Fdeveloper.vimeo.com%2Fapps%2Fnew; vimeo_gdpr_optin=1; vimeo=OHLtD4ZeDtPMVHLXX4LP4e4PMxHNePNdtZtPPeeNcX%2C4cPPedccc3edLSPXXLdSDP3SMw3h_OI3uHLM5i_Ic9j3H9ubNwizNVi9wMIHXe4ZcSea4Bc%2CL4XLateZPeZdeNDXe4NNeDZDd%2CXPeteeDDacZXa%2C4da43LBtSP3e; language=en; has_uploaded=1; __cf_bm=4ejU_f.yygJIWD08kPXISjOFhWiDKGKI1IY80Yizbpw-1660322659-0-ARy0C6oH+jRkKZTYnXqkbVb8j4fd5fbVFOWgIAWviYNFmSXUzgD81yltpNhrtK3pBzXLP4C84ySuUXkGa3X6wUE=
+Referer: http://wearingo.in/
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
