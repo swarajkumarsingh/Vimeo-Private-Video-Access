@@ -22,17 +22,6 @@ class _ABCState extends State<ABC> {
   late final PodPlayerController controller;
 
   @override
-  void initState() {
-    // getCookie("https://player.vimeo.com/video/730972653?h=eae2597c37");
-    // controller = PodPlayerController(
-    //   playVideoFrom: PlayVideoFrom.network(videoUrl.isEmpty
-    //       ? "https://vod-progressive.akamaized.net/exp=1660416955~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1194%2F29%2F730972653%2F3387012699.mp4~hmac=0415734004752e7d495dddf372b546922a90b5b52e8bfd7aa4da47bf6740032c/vimeo-prod-skyfire-std-us/01/1194/29/730972653/3387012699.mp4"
-    //       : videoUrl),
-    // )..initialise();
-    // super.initState();
-  }
-
-  @override
   void dispose() {
     controller.dispose();
     super.dispose();
@@ -73,61 +62,65 @@ class _ABCState extends State<ABC> {
     };
 
     // GET video response
-    http.Response response = await http.get(
-      Uri.tryParse(
-          "https://player.vimeo.com/video/730972653?h=eae2597c37&badge=0&autopause=0&player_id=0&app_id=58479")!,
-      headers: headers,
-    );
+   try {
+      http.Response response = await http.get(
+        Uri.tryParse(
+            "https://player.vimeo.com/video/730972653?h=eae2597c37&badge=0&autopause=0&player_id=0&app_id=58479")!,
+        headers: headers,
+      );
 
-    print(response.body);
+      print(response.body);
 
-    if (response.statusCode != 200) {
-      setState(() {
-        videoUrl = "response statusCode ${response.statusCode}";
-      });
-      showSnackBar(context, "something went wrong, Please re-start the app");
-      return;
-    }
-
-    // Get title of the video
-    var document = parse(response.body);
-    setState(() {
-      // Getting video url
-
-      var scripts = document.getElementsByTagName("script");
-
-      var longestScript = '';
-      for (var element in scripts) {
-        if (element.innerHtml.length > longestScript.length) {
-          longestScript = element.innerHtml;
-        }
-      }
-      var startingIndex =
-          longestScript.indexOf("var config = {") + "var config = {".length - 1;
-      var endingIndex = longestScript.indexOf("};") + "};".length - 1;
-      var jsonConfig = longestScript.substring(startingIndex, endingIndex);
-      var videoConfig = jsonDecode(jsonConfig);
-      var videoToPlay = videoConfig['request']['files']['progressive'][0];
-      for (var video in videoConfig['request']['files']['progressive']) {
-        if (videoToPlay['width']! < video['width']) {
-          videoToPlay = video;
-        }
+      if (response.statusCode != 200) {
+        setState(() {
+          videoUrl = "response statusCode ${response.statusCode}";
+        });
+        showSnackBar(context, "something went wrong, Please re-start the app");
+        return;
       }
 
+      // Get title of the video
+      var document = parse(response.body);
       setState(() {
+        // Getting video url
+
+        var scripts = document.getElementsByTagName("script");
+
+        var longestScript = '';
+        for (var element in scripts) {
+          if (element.innerHtml.length > longestScript.length) {
+            longestScript = element.innerHtml;
+          }
+        }
+        var startingIndex = longestScript.indexOf("var config = {") +
+            "var config = {".length -
+            1;
+        var endingIndex = longestScript.indexOf("};") + "};".length - 1;
+        var jsonConfig = longestScript.substring(startingIndex, endingIndex);
+        var videoConfig = jsonDecode(jsonConfig);
+        var videoToPlay = videoConfig['request']['files']['progressive'][0];
+        for (var video in videoConfig['request']['files']['progressive']) {
+          if (videoToPlay['width']! < video['width']) {
+            videoToPlay = video;
+          }
+        }
+
         videoUrl = videoToPlay["url"];
         title = document.getElementsByTagName("title")[0].text;
-      });
 
-      if (videoUrl.isNotEmpty || title.isNotEmpty) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return pVideo(appBarText: title, videoUrl: videoUrl);
-        }));
-      } else {
-        showSnackBar(context, "something went wrong, Please re-start the app");
-      }
-    });
-  } //  Run command in the website Function
+        if (videoUrl.isNotEmpty || title.isNotEmpty) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
+            return pVideo(appBarText: title, videoUrl: videoUrl);
+          }));
+        } else {
+          showSnackBar(
+              context, "something went wrong, Please re-start the app");
+        }
+      });
+   } catch (e) {
+      showSnackBar(context, "something went wrong, Please re-start the app");
+   }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,12 +130,7 @@ class _ABCState extends State<ABC> {
       ),
       body: WebView(
         initialUrl: "https://player.vimeo.com/video/730972653?h=eae2597c37",
-        onWebViewCreated: (WebViewController webViewController) async {
-          ctrl = webViewController;
-          var something = await webViewController.runJavascriptReturningResult(
-              '(function() { return JSON.stringify(config); })();');
-          print(something);
-        },
+        onWebViewCreated: (_) async {},
         javascriptMode: JavascriptMode.unrestricted,
         gestureNavigationEnabled: true,
         onPageFinished: (_) async {
