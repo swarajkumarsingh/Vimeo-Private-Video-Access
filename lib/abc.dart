@@ -126,17 +126,8 @@ class _ABCState extends State<ABC> {
           return pVideo(appBarText: title, videoUrl: videoUrl);
         }));
       }
-
-
-
-      ///
-      ///
     });
-  }
-  //  Run command in the website Function
-  // runJS(command) {
-  //   return ctrl.runJavascript(command);
-  // }
+  }  //  Run command in the website Function
 
   @override
   Widget build(BuildContext context) {
