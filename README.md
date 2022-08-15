@@ -18,7 +18,7 @@ Javascript, HTML, CSS, REACT, ANGULAR, BOOTSTRAP, TAILWIND, TYPESCRIPT, PHP, NOD
 Packages Needed to be install
 
 ```bash
-  flutter pub get pod_player http webview_flutter webview_cookie_manager
+  flutter pub add pod_player http webview_flutter webview_cookie_manager
 ```
 
 
