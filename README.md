@@ -1,6 +1,6 @@
 
 
-# Flutter Mobile Auth Package
+# Vimeo Private video Accessing
 
 This Package is a good starter, of accessing private videos of vimeo, which is a very difficult because of poor vimeo poor docs and no vime-flutter community, without subscription, just need the video id and h-query, this video is with Error-Handling ...
 
