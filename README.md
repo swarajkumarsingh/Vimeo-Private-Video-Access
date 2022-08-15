@@ -1,16 +1,41 @@
-# vimeo_demo
 
-A new Flutter project.
 
-## Getting Started
+# Flutter Mobile Auth Package
 
-This project is a starting point for a Flutter application.
+This Package is a good starter, of accessing private videos of vimeo, which is a very difficult because of poor vimeo poor docs and no vime-flutter community, without subscription, just need the video id and h-query, this video is with Error-Handling ...
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 About Me
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Swaraj Kumar Singh - Web, Andriod, IOS, Full Stack developer, Also interested in AI models and Machine Learning.
+
+
+## 🛠 Skills
+Javascript, HTML, CSS, REACT, ANGULAR, BOOTSTRAP, TAILWIND, TYPESCRIPT, PHP, NODEJS, DJANGO, EXPRESSJS, MONGODB, FIREBASE, REDIS, WORDPRESS, DYNAMODB, AWS, PYTHON, WEB SCRAPING, SOCKET.IO, JAVA, KOTLIN, DART, FLUTTER, PYTORCH
+
+## Packages
+
+Packages Needed to be install
+
+```bash
+  flutter pub add pod_player http webview_flutter webview_cookie_manager
+```
+
+
+## Tech Stack
+
+**Client:** Flutter
+
+**Server:** Node, Express, Firebase
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/swaraj-kumar-a65ab922a/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/SwarajKumarSi16)
+
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at swaraj.singh.12.2006@gmail.com
+
