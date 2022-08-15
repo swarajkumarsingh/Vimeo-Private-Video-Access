@@ -6,7 +6,7 @@ import 'package:html/parser.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pod_player/pod_player.dart';
-import 'package:vimeo_demo/p_video.dart';
+import 'package:vimeo_demo/video_player.dart';
 import 'package:vimeo_demo/utils.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 import 'package:webview_flutter/webview_flutter.dart';
