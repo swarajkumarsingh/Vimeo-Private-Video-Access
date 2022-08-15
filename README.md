@@ -18,7 +18,7 @@ Javascript, HTML, CSS, REACT, ANGULAR, BOOTSTRAP, TAILWIND, TYPESCRIPT, PHP, NOD
 Packages Needed to be install
 
 ```bash
-  flutter pub get firebase_auth firebase_core get_storage http get file_picker connectivity_plus fluttertoast
+  flutter pub get pod_player http webview_flutter webview_cookie_manager
 ```
 
 
