@@ -6,8 +6,8 @@ import 'package:html/parser.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pod_player/pod_player.dart';
+import 'package:vimeo_demo/p_video.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart';
-
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ABC extends StatefulWidget {
@@ -18,18 +18,17 @@ class ABC extends StatefulWidget {
 }
 
 class _ABCState extends State<ABC> {
-
   late final PodPlayerController controller;
 
   @override
   void initState() {
-    getCookie("https://player.vimeo.com/video/730972653?h=eae2597c37");
-    controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.network(
-        videoUrl.isEmpty ? "https://vod-progressive.akamaized.net/exp=1660416955~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1194%2F29%2F730972653%2F3387012699.mp4~hmac=0415734004752e7d495dddf372b546922a90b5b52e8bfd7aa4da47bf6740032c/vimeo-prod-skyfire-std-us/01/1194/29/730972653/3387012699.mp4" : videoUrl
-      ),
-    )..initialise();
-    super.initState();
+    // getCookie("https://player.vimeo.com/video/730972653?h=eae2597c37");
+    // controller = PodPlayerController(
+    //   playVideoFrom: PlayVideoFrom.network(videoUrl.isEmpty
+    //       ? "https://vod-progressive.akamaized.net/exp=1660416955~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1194%2F29%2F730972653%2F3387012699.mp4~hmac=0415734004752e7d495dddf372b546922a90b5b52e8bfd7aa4da47bf6740032c/vimeo-prod-skyfire-std-us/01/1194/29/730972653/3387012699.mp4"
+    //       : videoUrl),
+    // )..initialise();
+    // super.initState();
   }
 
   @override
@@ -120,11 +119,18 @@ class _ABCState extends State<ABC> {
         videoUrl = videoToPlay["url"];
       });
 
-      print(videoUrl);
+      title = document.getElementsByTagName("title")[0].text;
+
+      if (videoUrl.isNotEmpty || title.isNotEmpty) {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return pVideo(appBarText: title, videoUrl: videoUrl);
+        }));
+      }
+
+
 
       ///
       ///
-      title = document.getElementsByTagName("title")[0].text;
     });
   }
   //  Run command in the website Function
@@ -138,29 +144,23 @@ class _ABCState extends State<ABC> {
       appBar: AppBar(
         title: title.isNotEmpty ? Text(title) : const Text("Title"),
       ),
-      body: Column(
-        children: [
-          Text("VideoUrl $videoUrl"),
-          PodVideoPlayer(controller: controller),
-        ],
+      body: WebView(
+        initialUrl: "https://player.vimeo.com/video/730972653?h=eae2597c37",
+        onWebViewCreated: (WebViewController webViewController) async {
+          ctrl = webViewController;
+          var something = await webViewController.runJavascriptReturningResult(
+              '(function() { return JSON.stringify(config); })();');
+          print(something);
+        },
+        javascriptMode: JavascriptMode.unrestricted,
+        gestureNavigationEnabled: true,
+        onPageFinished: (_) async {
+          await getCookie(
+              "https://player.vimeo.com/video/730972653?h=eae2597c37");
+        },
+        onPageStarted: (_) async {},
+        onProgress: (_) {},
       ),
     );
   }
 }
-
-
-
-// WebView(
-//         initialUrl: "https://player.vimeo.com/video/730972653?h=eae2597c37",
-//         onWebViewCreated: (WebViewController webViewController) async {
-//           ctrl = webViewController;
-//           var something = await webViewController.runJavascriptReturningResult(
-//               '(function() { return JSON.stringify(config); })();');
-//           print(something);
-//         },
-//         javascriptMode: JavascriptMode.unrestricted,
-//         gestureNavigationEnabled: true,
-//         onPageFinished: (_) async {},
-//         onPageStarted: (_) async {},
-//         onProgress: (_) {},
-//       ),

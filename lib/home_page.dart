@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vimeo_demo/video_player_pod.dart';
-import 'package:vimeo_demo/video_player_pod_private.dart';
 import 'package:vimeo_demo/video_player_vimeo.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,61 +11,90 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Vimeo Demo"),
-        ),
-        body:
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Center(
-                  child: Text("Vimeo Demo App"),
-                ),
-                const SizedBox(height: 20),
-                const Center(
-                  child: Text(
-                      "NOTE: The given videos are public, \n for private we need to do \n http GET POST request, which will do it tomorrow."),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) {
-                        return const VideoPlayerVimeo();
-                      }),
-                    );
-                  },
-                  child: const Text("Vimeo Player"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (_) {
-                    //     return const PlayVideoFromVimeo();
-                    //   }),
-                    // );
-                  },
-                  child: const Text("POD Player"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (_) {
-                    //     return  PlayVideoFromNetwork();
-                    //   }),
-                    // );
-                  },
-                  child: const Text("Private video vimeo_video_player"),
-                ),
-
-              ],
-            ),
-           );
+      appBar: AppBar(
+        title: const Text("Vimeo Demo"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          //**
+          // Below Widget is for something
+          // */
+          One(),
+          //**
+          // Below Widget is for something
+          // */
+          Two(),
+          //**
+          // Below Widget is for something
+          // */
+          Three(),
+        ],
+      ),
+    );
   }
 }
 
+class Three extends StatelessWidget {
+  const Three({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (_) {
+        //     return  PlayVideoFromNetwork();
+        //   }),
+        // );
+      },
+      child: const Text("Private video vimeo_video_player"),
+    );
+  }
+}
+
+class Two extends StatelessWidget {
+  const Two({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (_) {
+        //     return const PlayVideoFromVimeo();
+        //   }),
+        // );
+      },
+      child: const Text("POD Player"),
+    );
+  }
+}
+
+class One extends StatelessWidget {
+  const One({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) {
+            return const VideoPlayerVimeo();
+          }),
+        );
+      },
+      child: const Text("Vimeo Player"),
+    );
+  }
+}
