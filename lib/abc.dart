@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously
 import 'dart:convert';
 
 import 'package:html/parser.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pod_player/pod_player.dart';
 import 'package:vimeo_demo/p_video.dart';
+import 'package:vimeo_demo/utils.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -68,9 +69,7 @@ class _ABCState extends State<ABC> {
       "Referer": "http://wearingo.in/",
       "auth_redirect":
           "https%3A%2F%2Fdeveloper.vimeo.com%2Fapps%2Fnew; vimeo_gdpr_optin=1; vimeo=OHLtD4ZeDtPMVHLXX4LP4e4PMxHNePNdtZtPPeeNcX%2C4cPPedccc3edLSPXXLdSDP3SMw3h_OI3uHLM5i_Ic9j3H9ubNwizNVi9wMIHXe4ZcSea4Bc%2CL4XLateZPeZdeNDXe4NNeDZDd%2CXPeteeDDacZXa%2C4da43LBtSP3e; language=en; has_uploaded=1; __cf_bm=4ejU_f.yygJIWD08kPXISjOFhWiDKGKI1IY80Yizbpw-1660322659-0-ARy0C6oH+jRkKZTYnXqkbVb8j4fd5fbVFOWgIAWviYNFmSXUzgD81yltpNhrtK3pBzXLP4C84ySuUXkGa3X6wUE=https%3A%2F%2Fdeveloper.vimeo.com%2Fapps%2Fnew; vimeo_gdpr_optin=1; vimeo=OHLtD4ZeDtPMVHLXX4LP4e4PMxHNePNdtZtPPeeNcX%2C4cPPedccc3edLSPXXLdSDP3SMw3h_OI3uHLM5i_Ic9j3H9ubNwizNVi9wMIHXe4ZcSea4Bc%2CL4XLateZPeZdeNDXe4NNeDZDd%2CXPeteeDDacZXa%2C4da43LBtSP3e; language=en; has_uploaded=1; __cf_bm=4ejU_f.yygJIWD08kPXISjOFhWiDKGKI1IY80Yizbpw-1660322659-0-ARy0C6oH+jRkKZTYnXqkbVb8j4fd5fbVFOWgIAWviYNFmSXUzgD81yltpNhrtK3pBzXLP4C84ySuUXkGa3X6wUE=",
-      "Cookie":
-          "'language=en; vuid=pl959738990.911525533; vimeo_gdpr_optin=1; __ssid=30e26209-7ae9-4e51-b05e-b493252814f1; player="
-              "; auth_redirect=%2Fupload; _abexps=%7B%221057%22%3A%22false%22%2C%222523%22%3A%22variant%22%2C%222540%22%3A%22variant%22%7D; OptanonConsent=isGpcEnabled=0&datestamp=Fri+Aug+12+2022+01%3A51%3A08+GMT%2B0530+(India+Standard+Time)&version=6.29.0&isIABGlobal=false&hosts=&landingPath=NotLandingPage&groups=C0001%3A1%2CC0002%3A1%2CC0003%3A1%2CC0004%3A1&AwaitingReconsent=false&geolocation=IN%3BKA; OptanonAlertBoxClosed=2022-08-11T20:21:08.758Z'"
+      "Cookie": gotCookies[0].toString()
     };
 
     // GET video response
@@ -86,6 +85,7 @@ class _ABCState extends State<ABC> {
       setState(() {
         videoUrl = "response statusCode ${response.statusCode}";
       });
+      showSnackBar(context, "something went wrong, Please re-start the app");
       return;
     }
 
@@ -113,21 +113,21 @@ class _ABCState extends State<ABC> {
           videoToPlay = video;
         }
       }
-      print(videoToPlay['url']);
 
       setState(() {
         videoUrl = videoToPlay["url"];
+        title = document.getElementsByTagName("title")[0].text;
       });
-
-      title = document.getElementsByTagName("title")[0].text;
 
       if (videoUrl.isNotEmpty || title.isNotEmpty) {
         Navigator.push(context, MaterialPageRoute(builder: (_) {
           return pVideo(appBarText: title, videoUrl: videoUrl);
         }));
+      } else {
+        showSnackBar(context, "something went wrong, Please re-start the app");
       }
     });
-  }  //  Run command in the website Function
+  } //  Run command in the website Function
 
   @override
   Widget build(BuildContext context) {
