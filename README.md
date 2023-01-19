@@ -2,7 +2,7 @@
 
 # Vimeo Private video Accessing
 
-This Package is a good starter, of accessing private videos of vimeo, which is a very difficult because of poor vimeo poor docs and no vime-flutter community, but using this git-repo you can do it easily, and also without vimeo subscription, to get started you just need the video id and h-query, this video is with Error-Handling ...
+This Package is a good starter, of accessing private videos of vimeo, which is a very difficult because of poor vimeo documentation and no vimeo-flutter community, but using this git-repo you can do it easily, and also without vimeo subscription, to get started you just need the video id, this git-repo is with Error-Handling ...
 
 
 ## 🚀 About Me
